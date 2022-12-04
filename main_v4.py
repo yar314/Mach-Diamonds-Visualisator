@@ -228,7 +228,7 @@ def start():
                 plt.gca().add_patch(plt.Polygon(intersect_4([dots_low[0],dots_up[i+1]],[dots_up[1+j],dots_low[len(x)-1]],[dots_low[0],dots_up[i+2]],[dots_up[2+j],dots_low[len(x)-1]]),color=color))
                 
 
-        m=Mach_from_omega(omega(I(-theta[0],omega_n),t_n+1000-I(theta[len(theta)-1],omega_n)))
+        m=Mach_from_omega(omega(I(-theta[0],omega_n),II(theta[0],omega_n))
         color='#'+r+str(hex(int(k1*m+k0))).split('x')[-1]+b
         plt.gca().add_patch(plt.Polygon(intersect_4([dots_low[0],dots_up[len(x)-2]],[dots_low[len(x)-1],dots_up[1]],[dots_up[len(x)-1],dots_low[1]],[dots_low[len(x)-2],dots_up[0]]),color=color))
         
