@@ -4,8 +4,6 @@ import numpy as np
 import math as mt
 from matplotlib.colors import LinearSegmentedColormap
 import tkinter as tk
-import sys
-import os
 
 def om(M):
     y=1.4
@@ -72,16 +70,6 @@ def intersect_4(a,b,c,d):
     x4 = seg_int(d,a)[0]
     y4 = seg_int(d,a)[1]
     return [[x1,y1],[x2,y2],[x3,y3],[x4,y4]]
-
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
-    try:
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
 
 def start():
     plt.axis('off')  # command for hiding the axis.
@@ -299,7 +287,6 @@ def start():
 
 window = tk.Tk()
 window.title('Diamond')
-window.iconbitmap(resource_path('icon.ico'))
 window.geometry('220x260')
 window.resizable(width=0, height=0)
 
