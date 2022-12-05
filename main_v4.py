@@ -130,19 +130,19 @@ def start():
         for i in range(n):
             m=Mach_from_omega(2*I_0-1000-(t_n/n)*i)
             m_grad.append(m)
+        for i in range(len(x)-3):
+            m=Mach_from_omega(omega_n)
+            m_grad.append(m)
         for i in range(n-1):
             for j in range(n-1-i):
-                m=Mach_from_omega(omega(I(theta[i+1],omega_n),j*t_n/n+1000-I(theta[i],omega_n)))
+                m=Mach_from_omega(omega(I(theta[i+1],omega_n),(j+2)*t_n/n+1000-I(theta[i],omega_n)))
                 m_grad.append(m)
-            m=Mach_from_omega(omega(I(theta[i+1],omega_n),t_n+1000-I(theta[i],omega_n)))
+            m=Mach_from_omega(omega(I(theta[i+1],omega_n),t_n+1000-I(t_n,omega_n)))
             m_grad.append(m)
-            if n % 2 != 0:
-                m=Mach_from_omega(omega(I(theta[len(theta)-1],omega_n),II(theta[0],omega_n)))
-                m_grad.append(m)
             for j in range(i):
-                m=Mach_from_omega(omega(I(theta[i+1],omega_n),theta[1+j]+1000-I(theta[i+1],omega_n)))
+                m=Mach_from_omega(omega(I(theta[i+1],omega_n),theta[1+j]+1000-I(theta[j+1],omega_n)))
                 m_grad.append(m)
-        m=Mach_from_omega(omega(I(-theta[0],omega_n),t_n+1000-I(theta[len(theta)-1],omega_n)))
+        m=Mach_from_omega(omega(I(-theta[0],omega_n),II(theta[0],omega_n)))
         m_grad.append(m)
 
         m_max=mt.ceil(max(m_grad)*100)/100
