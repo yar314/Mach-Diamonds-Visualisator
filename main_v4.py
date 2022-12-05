@@ -4,15 +4,11 @@ import numpy as np
 import math as mt
 from matplotlib.colors import LinearSegmentedColormap
 import tkinter as tk
+from scipy import interpolate
 
 def om(M):
     y=1.4
     return mt.sqrt((y+1)/(y-1))*mt.atan(mt.sqrt((M**2-1)*(y-1)/(y+1)))-mt.atan(mt.sqrt(M**2-1))
-
-def Mach_from_omega(omega):
-    omega = omega*(180/3.1415926)
-    return 0.000014*mt.pow(omega,3)-0.0011*omega**2+0.0631*omega+0.9447
-
 
 def pr_ratio(M):
     y=1.4
@@ -82,6 +78,16 @@ def start():
     y=1.4
     t_0=0
     omega_0 = om(M)
+    
+    omega_points = [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 100]
+    m_points = [1, 1.08, 1.132, 1.177, 1.218, 1.256, 1.435, 1.605, 1.775, 1.950, 2.134, 2.329, 2.538, 2.764, 3.013, 3.287, 3.594, 3.941, 4.339, 4.81, 5.348, 6.819, 9.21]
+    
+    mach_spline = interpolate.splrep(omega_points, m_points)
+
+    def Mach_from_omega(omega):
+        omega = omega*(180/3.1415926)
+        return interpolate.splev(omega, mach_spline)
+    
     pr_ratio_0= pr_ratio(M)
     I_0=I(t_0,omega_0)
     II_0=II(t_0,omega_0)
